@@ -2,7 +2,7 @@
 //
 // Prerrequisitos: Tener la biblioteca SDSL instalada
 //
-// Compilación: g++ -O3 -o sa sa.cpp -lsdsl -ldivsufsort -ldivsufsort64
+// Compilación: g++ -O3 -o sa sa.cpp -lsdsl -ldivsufsort -ldivsufsort64 -std=c++11
 
 #include <sdsl/suffix_arrays.hpp>
 #include <string>

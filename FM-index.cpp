@@ -2,7 +2,7 @@
 //
 // Prerrequisitos: Tener la biblioteca SDSL instalada
 //
-// Compilación: g++ -O3 -o fmi FM-index.cpp -lsdsl -ldivsufsort -ldivsufsort64
+// Compilación: g++ -O3 -o fmi FM-index.cpp -lsdsl -ldivsufsort -ldivsufsort64 -std=c++11
 
 #include <sdsl/suffix_arrays.hpp>
 #include <string>
@@ -13,7 +13,7 @@ using namespace sdsl;
 using namespace std;
 
 int main(int argc, char** argv) {
-  if (argc !=  2) {
+    if (argc !=  2) {
     cout << "Uso: " << argv[0] << " <archivo entrada>" << endl;
     return 1;
   }
