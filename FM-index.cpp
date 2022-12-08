@@ -12,11 +12,22 @@
 using namespace sdsl;
 using namespace std;
 
+// Cada estructura de datos y algoritmo deben proveer de la funcionalidad doc locate(T, p), 
+// la cual retorna los documentos que contienen al menos una ocurrencia del patr ́on p.
+//  Los documentos ser ́an representado por medio de su concatenaci ́on T
+
+void doc_locate(const string& T , const string& p){
+
+}
+
+
 int main(int argc, char** argv) {
     if (argc !=  2) {
         cout << "Uso: " << argv[0] << " <archivo entrada>" << endl;
         return 1;
     }
+
+    cout << argv[1] << endl;
 
     // Una versión compacta del suffix array, implementada en la biblioteca
     // SDSL. En este caso, utiliza un wavelet tree tipo wt_int<> como
@@ -24,7 +35,7 @@ int main(int argc, char** argv) {
     // Otros posibles building blocks son: wt_huff<>, wt_int<rrr_vector<> >, entre
     // otras combinaciones
     cout << "Construyendo el FM-index ..." << endl;
-    csa_wt<wt_int<>> fm_index;
+    csa_wt<wt_huff<>> fm_index;
     construct(fm_index, argv[1], 1);
       
     
