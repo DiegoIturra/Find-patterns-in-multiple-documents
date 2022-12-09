@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include <algorithm>
+#include <unordered_set>
 
 using namespace sdsl;
 using namespace std;
@@ -36,10 +37,9 @@ class FM_index {
                 docSeparation.push_back(T.size());
             }
             T.pop_back();
-            cout << T << endl;
-
+            
             // Construir el FM index
-            construct(fm_index, T, 1);
+            construct_im(fm_index, T, 1);
         };
 
         // Retorna las posiciones donde comienza el patrón p
@@ -63,25 +63,24 @@ class FM_index {
 
         // Retorna el tamaño del FM index en megabytes
         size_t size() {
-            return sdsl::size_in_mega_bytes(fm_index);
+            return sdsl::size_in_mega_bytes(this->fm_index);
         };
 
-        // Retorna los documentos que tienen al menos una ocurrencia del patrón p
-        vector<int> doc_locate(string& p) {
-            vector<int> docs;
+        unordered_set<int> doc_locate(string& p){
+            unordered_set<int> docs;
             auto posiciones = locate(p);
-            for (auto& pos : posiciones) {
+            for (auto& pos : posiciones){
                 int docNum = 1;
-                for (int& index : docSeparation) {
+                for (int& index : docSeparation){
                     if (pos < index) {
-                        docs.push_back(docNum);
+                        docs.insert(docNum);
                         break;
                     }
-                    docNum++;
+                    docNum++;   
                 }
             }
             return docs;
-        };
+        }
 
 };
 
@@ -122,13 +121,10 @@ int main(int argc, char** argv) {
 
     
     if (occs > 0) {
-        cout << "Las ocurrencias comienzan en las siguientes posiciones: " << endl;
-        //auto locations = locate(fm_index, query.begin(), query.begin()+m)
-        auto posiciones = fm_index.locate(patron);
-        sort(posiciones.begin(), posiciones.end());
-      
-        for (size_t i = 0; i < occs; ++i) {
-	       cout << posiciones[i] << endl;
+        cout << "Documentos donde esta el patron " << endl;
+        unordered_set<int> documentsIds = fm_index.doc_locate(patron);
+        for(int docId : documentsIds){
+            cout << "D" << docId << endl;
         }
         
     }
